@@ -5,12 +5,14 @@ from main import app
 def test_ping():
     with TestClient(app) as client:
         response = client.get("/ping")
+        # asserting the correct response is received
         assert response.status_code == 200
         assert response.json() == {"ping": "pong"}
 
 
 # test to check if Iris Virginica is classified correctly
 def test_pred_virginica():
+    # defining a sample payload for the testcase
     payload = {
         "sepal_length": 3,
         "sepal_width": 5,
@@ -19,5 +21,6 @@ def test_pred_virginica():
     }
     with TestClient(app) as client:
         response = client.post("/predict_flower", json=payload)
+        # asserting the correct response is received
         assert response.status_code == 200
         assert response.json() == {"flower_class": "Iris Virginica"}

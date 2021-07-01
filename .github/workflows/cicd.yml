@@ -6,7 +6,8 @@ on: [pull_request, push]
 jobs:
   # first job to test the application using pytest
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # choose the OS for running the action
+    # define the individual sequential steps to be run
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -23,11 +24,13 @@ jobs:
   
   # second job to zip the codebase and upload it as an artifact when build succeeds 
   upload_zip:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # choose the OS for running the action
     needs: build
     
     # only run this action for pushes
     if: ${{ github.event_name == 'push' }}
+
+    # define the individual sequential steps to be run
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
