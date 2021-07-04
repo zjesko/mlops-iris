@@ -53,4 +53,4 @@ def test_pred_setosa():
 
 
 def test_dummy_test():
-    assert 2 == 10//2
+    assert 2 == 10//5
