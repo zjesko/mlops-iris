@@ -31,7 +31,7 @@ def test_pred_versicolor():
         "sepal_length": 7.0,
         "sepal_width": 3.2,
         "petal_length": 4.7,
-        "petal_width": 1.4
+        "petal_width": 1.4,
     }
     with TestClient(app) as client:
         response = client.post("/predict_flower",json=payload)
@@ -44,12 +44,12 @@ def test_pred_setosa():
         "sepal_length": 5.1,
         "sepal_width": 3.5,
         "petal_length": 1.4,
-        "petal_width": 0.2
+        "petal_width": 0.2,
     }
     with TestClient(app) as client:
         response = client.post("/predict_flower",json=payload)
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Iris Versicolour"}
+        assert response.json() == {"flower_class": "Iris Setosa"}
 
 
 def test_dummy_test():
