@@ -1,3 +1,4 @@
+from math import pi
 from sklearn import datasets
 from sklearn import neighbors
 from sklearn.model_selection import train_test_split
@@ -7,11 +8,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 import numpy as np
+import os
+import pickle
 
 # define a Gaussain NB classifier
 #clf = GaussianNB()
-clf=None #keeping global variable as is
-classifiers=[GaussianNB(),RandomForestClassifier(n_estimators=200),KNeighborsClassifier(n_neighbors=6,n_jobs=-1),LogisticRegression()]
+classifiers=[GaussianNB(),RandomForestClassifier(n_estimators=200),KNeighborsClassifier(n_neighbors=6,n_jobs=-1),LogisticRegression(max_iter=1000)]
 names=['gaussianNB','randomforestclassifier','KNNClassifier','LogisticRegression']
 accuracy=[]
 
@@ -27,6 +29,7 @@ def load_model():
 
     # do the test-train split and train the model
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    model_list=[]
     for idx,clf in enumerate(classifiers):
         #clf.fit(X_train, y_train)
         clf.fit(X_train,y_train)
@@ -35,17 +38,20 @@ def load_model():
         acc = accuracy_score(y_test, clf.predict(X_test))
         print(f"Model {names[idx]} trained with accuracy: {round(acc, 3)}")
         accuracy.append(acc)
+        model_list.append(clf)
         acc=0
+
     
     acc_index=np.argmax(accuracy)
-    loaded_model=names[acc_index]
-    clf=classifiers[acc_index]
+
+    loaded_model=model_list[acc_index]
     print(f"loading {loaded_model} with accuracy {accuracy[acc_index]}")
+    pickle.dump(loaded_model,open('model.pkl','wb'))
 
 
 # function to predict the flower using the model
 def predict(query_data):
-    print(clf)
+    clf=pickle.load(open('model.pkl','rb'))
     x = list(query_data.dict().values())
     prediction = clf.predict([x])[0]
     print(f"Model prediction: {classes[prediction]}")
@@ -54,7 +60,7 @@ def predict(query_data):
 # function to retrain the model as part of the feedback loop
 def retrain(data):
     # pull out the relevant X and y from the FeedbackIn object
-    print(clf)
+    clf=pickle.load(open('model.pkl','rb'))
     X = [list(d.dict().values())[:-1] for d in data]
     y = [r_classes[d.flower_class] for d in data]
 
