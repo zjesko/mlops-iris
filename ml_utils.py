@@ -15,7 +15,7 @@ import pickle
 #clf = GaussianNB()
 classifiers=[GaussianNB(),RandomForestClassifier(n_estimators=200),KNeighborsClassifier(n_neighbors=6,n_jobs=-1),LogisticRegression(max_iter=1000)]
 names=['gaussianNB','randomforestclassifier','KNNClassifier','LogisticRegression']
-accuracy=[]
+
 
 
 # define the class encodings and reverse encodings
@@ -30,13 +30,14 @@ def load_model():
     # do the test-train split and train the model
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
     model_list=[]
-    for idx,clf in enumerate(classifiers):
+    accuracy=[]
+    for clf in classifiers:
         #clf.fit(X_train, y_train)
         clf.fit(X_train,y_train)
 
         # calculate the print the accuracy score
         acc = accuracy_score(y_test, clf.predict(X_test))
-        print(f"Model {names[idx]} trained with accuracy: {round(acc, 3)}")
+        print(f"Model {clf} trained with accuracy: {round(acc, 3)}")
         accuracy.append(acc)
         model_list.append(clf)
         acc=0
