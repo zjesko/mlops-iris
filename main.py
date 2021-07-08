@@ -23,6 +23,7 @@ class QueryIn(BaseModel):
 # class which is returned in the response
 class QueryOut(BaseModel):
     flower_class: str
+    TIMESTAMP: datetime  # Its a datetime string (https://fastapi.tiangolo.com/tutorial/extra-data-types/)
 
 # class which is expected in the payload while re-training
 class FeedbackIn(BaseModel):
