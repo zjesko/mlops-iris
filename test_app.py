@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
-from datatime import datatime
+# from datatime import datetime
 
 # test to check the correct functioning of the /ping route
 def test_ping():
