@@ -12,6 +12,8 @@ app = FastAPI(title="Iris Predictor", docs_url="/")
 app.add_event_handler("startup", load_model)
 
 # class which is expected in the payload
+
+
 class QueryIn(BaseModel):
     sepal_length: float
     sepal_width: float
@@ -24,6 +26,8 @@ class QueryOut(BaseModel):
     flower_class: str
 
 # class which is expected in the payload while re-training
+
+
 class FeedbackIn(BaseModel):
     sepal_length: float
     sepal_width: float
@@ -45,6 +49,7 @@ def ping():
 def predict_flower(query_data: QueryIn):
     output = {"flower_class": predict(query_data)}
     return output
+
 
 @app.post("/feedback_loop", status_code=200)
 # Route to further train the model based on user input in form of feedback loop
