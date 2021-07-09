@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
-from ml_utils import load_model, predict, retrain
+from ml_utils import load_model, predict, retrain, load_model_r,predict_r, retrain_r
 from typing import List
 
 # defining the main app
@@ -53,6 +53,54 @@ def predict_flower(query_data: QueryIn):
 def feedback_loop(data: List[FeedbackIn]):
     retrain(data)
     return {"detail": "Feedback loop successful"}
+
+# calling the load_model during startup. Random Forest
+# this will train the model and keep it loaded for prediction.
+app.add_event_handler("startup", load_model_r)
+
+# class which is expected in the payload
+class QueryIn(BaseModel):
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+
+
+# class which is returned in the response
+class QueryOut(BaseModel):
+    flower_class: str
+
+# class which is expected in the payload while re-training
+class FeedbackIn(BaseModel):
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+    flower_class: str
+
+# Route definitions
+@app.get("/ping")
+# Healthcheck route to ensure that the API is up and running
+def ping():
+    return {"ping": "pong"}
+
+
+@app.post("/predict_flower_r", response_model=QueryOut, status_code=200)
+# Route to do the prediction using the ML model defined.
+# Payload: QueryIn containing the parameters
+# Response: QueryOut containing the flower_class predicted (200)
+def predict_flower_r(query_data: QueryIn):
+    output = {"flower_class": predict_r(query_data)}
+    return output
+
+@app.post("/feedback_loop_r", status_code=200)
+# Route to further train the model based on user input in form of feedback loop
+# Payload: FeedbackIn containing the parameters and correct flower class
+# Response: Dict with detail confirming success (200)
+def feedback_loop_r(data: List[FeedbackIn]):
+    retrain_r(data)
+    return {"detail": "Feedback loop successful"}
+
 
 
 # Main function to start the app when main.py is called
