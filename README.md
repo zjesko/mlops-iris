@@ -18,3 +18,6 @@ This repository contains code which demonstrates ML-Ops using a `FastAPI` applic
 2. Add 2 more unit tests of your choice to `test_app.py` and make sure they are passing.
 3. Add one more classifier to startup and use only the one with better accuracy.
 4. Add the attribute `timestamp` to the response and return the current time with it. 
+  
+## Name
+  Vinod
