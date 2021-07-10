@@ -43,7 +43,7 @@ def ping():
 # Payload: QueryIn containing the parameters
 # Response: QueryOut containing the flower_class predicted (200)
 def predict_flower(query_data: QueryIn):
-    output = {"flower_class": predict(query_data,"timestamp": str(ct))}
+    output = {"flower_class": predict(query_data),"timestamp": str(ct)}
     return output
 
 @app.post("/feedback_loop", status_code=200)
