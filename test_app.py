@@ -11,7 +11,7 @@ def test_ping():
         assert response.json() == {"ping": "pong", "timestamp": datetime.now().strftime("%H:%M:%S")}
 
 
-# test to check if Iris Virginica is classified correctly
+# test to check if Iris Virginica is classified correctly.
 def test_pred_virginica():
     # defining a sample payload for the testcase
     payload = {
