@@ -8,11 +8,11 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 
 # define a Gaussain NB classifier
-clf = GaussianNB()
+clf4 = GaussianNB()
 clf1 = DecisionTreeClassifier(max_depth = 3, random_state = 1)
 clf2 = KNeighborsClassifier(n_neighbors=5,metric ='manhattan')
 clf3 = RandomForestClassifier()
-clf4 = MLPClassifier()
+clf = MLPClassifier()
 
 # define the class encodings and reverse encodings
 classes = {0: "Iris Setosa", 1: "Iris Versicolour", 2: "Iris Virginica"}
@@ -33,7 +33,7 @@ def load_model():
 
     # calculate the print the accuracy score
     acc = accuracy_score(y_test, clf.predict(X_test))
-    print(f" GaussianNB Model trained with accuracy: {round(acc, 3)}")
+    print(f" MLP Model trained with accuracy: {round(acc, 3)}")
     #clf=clf1
     #acc = accuracy_score(y_test, clf.predict(X_test))
     #print(f" DecisionTreeClassifier Model trained with accuracy: {round(acc, 3)}")
