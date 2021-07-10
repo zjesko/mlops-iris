@@ -8,11 +8,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 
 # define a Gaussain NB classifier
-clf4 = GaussianNB()
-clf1 = DecisionTreeClassifier(max_depth = 3, random_state = 1)
-clf2 = KNeighborsClassifier(n_neighbors=5,metric ='manhattan')
-clf3 = RandomForestClassifier()
-clf = MLPClassifier()
+clf = GaussianNB()
+clf1 = MLPClassifier()
 
 # define the class encodings and reverse encodings
 classes = {0: "Iris Setosa", 1: "Iris Versicolour", 2: "Iris Virginica"}
@@ -26,7 +23,7 @@ def load_model():
     # do the test-train split and train the model
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
     clf.fit(X_train, y_train)     #GaussianNB
-    #clf1.fit(X_train, y_train)    #DecisionTreeClassifier
+    clf1.fit(X_train, y_train)    #DecisionTreeClassifier
     #clf2.fit(X_train, y_train)    #KNeighborsClassifier
     #clf3.fit(X_train, y_train)    #RandomForestClassifier
     #clf4.fit(X_train, y_train)    #MLPClassifier
@@ -35,7 +32,7 @@ def load_model():
     acc = accuracy_score(y_test, clf.predict(X_test))
     print(f" MLP Model trained with accuracy: {round(acc, 3)}")
     #clf=clf1
-    #acc = accuracy_score(y_test, clf.predict(X_test))
+    acc = accuracy_score(y_test, clf1.predict(X_test))
     #print(f" DecisionTreeClassifier Model trained with accuracy: {round(acc, 3)}")
     #clf=clf2
     #acc = accuracy_score(y_test, clf.predict(X_test))
