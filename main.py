@@ -23,7 +23,7 @@ class QueryIn(BaseModel):
 # class which is returned in the response
 class QueryOut(BaseModel):
     flower_class: str
-    TIMESTAMP: datetime  # Its a datetime string (https://fastapi.tiangolo.com/tutorial/extra-data-types/)
+    timestamp: datetime  # Its a datetime string (https://fastapi.tiangolo.com/tutorial/extra-data-types/)
 
 # class which is expected in the payload while re-training
 class FeedbackIn(BaseModel):
@@ -37,7 +37,15 @@ class FeedbackIn(BaseModel):
 @app.get("/ping")
 # Healthcheck route to ensure that the API is up and running
 def ping():
-    return {"ping": "pong", "TIMESTAMP": datetime.now()}
+    return {"ping": "pong", "timestamp": datetime.now().strftime("%H:%M:%S")}
+
+@app.get("/test1")
+def test1():
+    return {"Test1": "Its just a test1", "timestamp":datetime.now().strftime("%H:%M:%S")}
+
+@app.get("/test2")
+def test1():
+    return {"Test2": "Its just a test2", "timestamp":datetime.now().strftime("%H:%M:%S")}
 
 
 @app.post("/predict_flower", response_model=QueryOut, status_code=200)
@@ -45,7 +53,7 @@ def ping():
 # Payload: QueryIn containing the parameters
 # Response: QueryOut containing the flower_class predicted (200)
 def predict_flower(query_data: QueryIn):
-    output = {"flower_class": predict(query_data), "TIMESTAMP": datetime.now()}
+    output = {"flower_class": predict(query_data), "timestamp": datetime.now().strftime("%H:%M:%S")}
     return output
 
 @app.post("/feedback_loop", status_code=200)
@@ -54,7 +62,7 @@ def predict_flower(query_data: QueryIn):
 # Response: Dict with detail confirming success (200)
 def feedback_loop(data: List[FeedbackIn]):
     retrain(data)
-    return {"detail": "Feedback loop successful", "TIMESTAMP": datetime.now()}
+    return {"detail": "Feedback loop successful", "timestamp": datetime.now().strftime("%H:%M:%S")}
 
 
 # Main function to start the app when main.py is called
