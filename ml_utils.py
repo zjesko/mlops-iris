@@ -34,20 +34,18 @@ def load_model():
     # calculate the print the accuracy score
     acc = accuracy_score(y_test, clf.predict(X_test))
     print(f" GaussianNB Model trained with accuracy: {round(acc, 3)}")
-    clf=clf1
-    acc = accuracy_score(y_test, clf.predict(X_test))
-    print(f" DecisionTreeClassifier Model trained with accuracy: {round(acc, 3)}")
-    clf=clf2
-    acc = accuracy_score(y_test, clf.predict(X_test))
-    clf=clf3
-    print(f" KNeighborsClassifier Model trained with accuracy: {round(acc, 3)}")
-    acc = accuracy_score(y_test, clf.predict(X_test))
-    clf=clf4
-    print(f" RandomForestClassifier Model trained with accuracy: {round(acc, 3)}")
-    acc = accuracy_score(y_test, clf.predict(X_test))
-    print(f" MLPClassifier Model trained with accuracy: {round(acc, 3)}")
-
-
+    #clf=clf1
+    #acc = accuracy_score(y_test, clf.predict(X_test))
+    #print(f" DecisionTreeClassifier Model trained with accuracy: {round(acc, 3)}")
+    #clf=clf2
+    #acc = accuracy_score(y_test, clf.predict(X_test))
+    #clf=clf3
+    #print(f" KNeighborsClassifier Model trained with accuracy: {round(acc, 3)}")
+    #acc = accuracy_score(y_test, clf.predict(X_test))
+    #clf=clf4
+    #print(f" RandomForestClassifier Model trained with accuracy: {round(acc, 3)}")
+    #acc = accuracy_score(y_test, clf.predict(X_test))
+    #print(f" MLPClassifier Model trained with accuracy: {round(acc, 3)}")
 # function to predict the flower using the model
 def predict(query_data):
     x = list(query_data.dict().values())
