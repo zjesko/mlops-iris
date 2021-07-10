@@ -26,10 +26,10 @@ def load_model():
     # do the test-train split and train the model
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
     clf.fit(X_train, y_train)     #GaussianNB
-    clf1.fit(X_train, y_train)    #DecisionTreeClassifier
-    clf2.fit(X_train, y_train)    #KNeighborsClassifier
-    clf3.fit(X_train, y_train)    #RandomForestClassifier
-    clf4.fit(X_train, y_train)    #MLPClassifier
+    #clf1.fit(X_train, y_train)    #DecisionTreeClassifier
+    #clf2.fit(X_train, y_train)    #KNeighborsClassifier
+    #clf3.fit(X_train, y_train)    #RandomForestClassifier
+    #clf4.fit(X_train, y_train)    #MLPClassifier
 
     # calculate the print the accuracy score
     acc = accuracy_score(y_test, clf.predict(X_test))
