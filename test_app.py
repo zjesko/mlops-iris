@@ -24,3 +24,11 @@ def test_pred_virginica():
         # asserting the correct response is received
         assert response.status_code == 200
         assert response.json() == {"flower_class": "Iris Virginica"}
+
+# test to check if Iris Virginica is classified correctly
+def test_pred_virginica():
+    with TestClient(app) as client:
+        response = client.post("/feedback_loop")
+        # asserting the correct Feedback is received
+        assert response.status_code == 200
+        assert response.json() == {"detail": "Feedback loop successful"}
