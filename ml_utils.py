@@ -10,6 +10,7 @@ from sklearn.metrics import accuracy_score
 # define a Gaussain NB classifier
 clf = GaussianNB()
 clf1 = MLPClassifier()
+clf_better = clf
 
 # define the class encodings and reverse encodings
 classes = {0: "Iris Setosa", 1: "Iris Versicolour", 2: "Iris Virginica"}
@@ -29,9 +30,9 @@ def load_model():
     clf1.fit(X_train, y_train)    #MLPClassifier
 
     # calculate the print the accuracy score
-    acc = accuracy_score(y_test, clf.predict(X_test))
-    print(f" MLP Model trained with accuracy: {round(acc, 3)}")
-    acc1 = accuracy_score(y_test, clf1.predict(X_test))
+    acc = accuracy_score(y_test, clf.predict_better(X_test))
+    print(f" GaussianNB Model trained with accuracy: {round(acc, 3)}")
+    acc1 = accuracy_score(y_test, clf1.predict_better(X_test))
     print(f" MLP Model trained with accuracy: {round(acc1, 3)}")
     #clf=clf1
     #acc = accuracy_score(y_test, clf1.predict(X_test))
@@ -46,9 +47,19 @@ def load_model():
     #acc = accuracy_score(y_test, clf.predict(X_test))
     #print(f" MLPClassifier Model trained with accuracy: {round(acc, 3)}")
 # function to predict the flower using the model
-def predict(query_data):
+    if acc1 > acc:
+        clf_better = clf1
+    else:
+        clf_better = clf
+def predict_better(query_data):
     x = list(query_data.dict().values())
     prediction = clf.predict([x])[0]
+    print(f"Model prediction: {classes[prediction]}")
+    return classes[prediction]
+
+def predict(query_data):
+    x = list(query_data.dict().values())
+    prediction = clf_better.predict([x])[0]
     print(f"Model prediction: {classes[prediction]}")
     return classes[prediction]
 
