@@ -29,7 +29,6 @@ def test_pred_virginica():
 def test_pred_Feedback():
         # defining a sample payload for the testcase
     payload = {
-        [0,0,0,0,"string"]
         "sepal_length": 3.0,
         "sepal_width": 5.0,
         "petal_length": 3.2,
