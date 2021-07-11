@@ -51,9 +51,10 @@ def load_model():
         clf_better = clf1
     else:
         clf_better = clf
+
 def predict_better(query_data):
     x = list(query_data.dict().values())
-    prediction = clf.predict([x])[0]
+    prediction = clf.predict_better([x])[0]
     print(f"Model prediction: {classes[prediction]}")
     return classes[prediction]
 
