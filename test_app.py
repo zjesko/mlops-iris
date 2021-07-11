@@ -1,5 +1,8 @@
 from fastapi.testclient import TestClient
 from main import app
+from datetime import datetime
+
+date = datetime.now().strftime("%Y_%m_%d-%I:%M:%S")
 
 # test to check the correct functioning of the /ping route
 def test_ping():
@@ -23,4 +26,35 @@ def test_pred_virginica():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Iris Virginica"}
+        assert response.json()["flower_class"] == "Iris Virginica"
+        assert response.json()["date stamp"] == date
+
+# test to check if Iris Setosa is classified correctly
+def test_pred_Setosa():
+    # defining a sample payload for the testcase
+    payload = {
+        "sepal_length": 4.9,
+        "sepal_width": 3.1,
+        "petal_length": 1.5,
+        "petal_width": 0.2,
+    }
+    with TestClient(app) as client:
+        response = client.post("/predict_flower", json=payload)
+        # asserting the correct response is received
+        assert response.status_code == 200
+        assert response.json()["flower_class"] == "Iris Setosa"
+
+# test to check if Iris Versicolor is classified correctly
+def test_pred_Versicolor():
+    # defining a sample payload for the testcase
+    payload = {
+        "sepal_length": 4.9,
+        "sepal_width": 3.6,
+        "petal_length": 1.4,
+        "petal_width": 0.1,
+    }
+    with TestClient(app) as client:
+        response = client.post("/predict_flower", json=payload)
+        # asserting the correct response is received
+        assert response.status_code == 200
+        assert response.json()["flower_class"] == "Iris Versicolor"
