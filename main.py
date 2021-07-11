@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from ml_utils import load_model, predict, retrain
 from typing import List
 
+
 # defining the main app
 app = FastAPI(title="Iris Predictor", docs_url="/")
 
@@ -58,4 +59,4 @@ def feedback_loop(data: List[FeedbackIn]):
 # Main function to start the app when main.py is called
 if __name__ == "__main__":
     # Uvicorn is used to run the server and listen for incoming API requests on 0.0.0.0:8888
-    uvicorn.run("main:app", host="0.0.0.0", port=8888, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8886, reload=True)
