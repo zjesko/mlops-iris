@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from ml_utils import load_model, predict
 from typing import List
+import datetime
 
 # defining the main app
 app = FastAPI(title="Iris Predictor", docs_url="/")
@@ -22,6 +23,7 @@ class QueryIn(BaseModel):
 # class which is returned in the response
 class QueryOut(BaseModel):
     flower_class: str
+    timestamp: str
 
 # class which is expected in the payload while re-training
 class FeedbackIn(BaseModel):
@@ -37,13 +39,13 @@ class FeedbackIn(BaseModel):
 def ping():
     return {"ping": "pong"}
 
-
 @app.post("/predict_flower", response_model=QueryOut, status_code=200)
 # Route to do the prediction using the ML model defined.
 # Payload: QueryIn containing the parameters
 # Response: QueryOut containing the flower_class predicted (200)
 def predict_flower(query_data: QueryIn):
-    output = {"flower_class": predict(query_data)}
+    time = datetime.datetime.now()
+    output = {"flower_class": predict(query_data),"timestamp": str(time)}
     return output
 
 @app.post("/feedback_loop", status_code=200)
@@ -51,7 +53,7 @@ def predict_flower(query_data: QueryIn):
 # Payload: FeedbackIn containing the parameters and correct flower class
 # Response: Dict with detail confirming success (200)
 def feedback_loop(data: List[FeedbackIn]):
-    retrain(data)
+   # retrain(data)
     return {"detail": "Feedback loop successful"}
 
 
