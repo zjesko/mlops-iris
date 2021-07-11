@@ -30,6 +30,11 @@ def test_pred_Feedback():
         # defining a sample payload for the testcase
     payload = {
         [0,0,0,0,"string"]
+        "sepal_length": 3,
+        "sepal_width": 5,
+        "petal_length": 3.2,
+        "petal_width": 4.4,
+        "flower_class": "Iris-virginica"
     }
     with TestClient(app) as client:
         response = client.post("/feedback_loop",json=payload)
@@ -49,7 +54,7 @@ def test_pred_setosa():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json()["flower_class"] == "Iris Setosa"
+        assert response.json() == {"flower_class": "Iris Setosa"}
 
 def test_pred_versicolour():
     # defining a sample payload for the testcase
@@ -63,4 +68,4 @@ def test_pred_versicolour():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json()["flower_class"] == "Iris Versicolour"
+        assert response.json() == {"flower_class" : "Iris Versicolour"}
