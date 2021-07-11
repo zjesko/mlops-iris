@@ -29,11 +29,7 @@ def test_pred_virginica():
 def test_pred_Feedback():
         # defining a sample payload for the testcase
     payload = {
-        "sepal_length": 3,
-        "sepal_width": 5,
-        "petal_length": 3.2,
-        "petal_width": 4.4,
-        "flower_class": "Iris-setosa"
+        [0,0,0,0,"string"]
     }
     with TestClient(app) as client:
         response = client.post("/feedback_loop",json=payload)
