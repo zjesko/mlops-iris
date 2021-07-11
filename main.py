@@ -53,7 +53,7 @@ def predict_flower(query_data: QueryIn):
 # Payload: FeedbackIn containing the parameters and correct flower class
 # Response: Dict with detail confirming success (200)
 def feedback_loop(data: List[FeedbackIn]):
-    retrain(data)
+   # retrain(data)
     return {"detail": "Feedback loop successful"}
 
 
