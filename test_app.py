@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
+from datetime import datetime
 
 # test to check the correct functioning of the /ping route
 def test_ping():
@@ -7,7 +8,7 @@ def test_ping():
         response = client.get("/ping")
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"ping": "pong"}
+        assert response.json() == {"ping": "pong", "TimeStamp": datetime.now().strftime("%m, %d, %Y")}
 
 
 # test to check if Iris Virginica is classified correctly

@@ -2,9 +2,15 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
+from sklearn.svm import SVC
+from datetime import datetime
 
 # define a Gaussain NB classifier
-clf = GaussianNB()
+#clf = GaussianNB()
+
+# Defining the SVM classifier as part of Task
+
+clf = SVC(kernel='poly', degree=3, max_iter=300000)
 
 # define the class encodings and reverse encodings
 classes = {0: "Iris Setosa", 1: "Iris Versicolour", 2: "Iris Virginica"}
