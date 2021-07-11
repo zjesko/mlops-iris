@@ -30,8 +30,8 @@ def test_pred_Feedback():
         # defining a sample payload for the testcase
     payload = {
         [0,0,0,0,"string"]
-        "sepal_length": 3,
-        "sepal_width": 5,
+        "sepal_length": 3.0,
+        "sepal_width": 5.0,
         "petal_length": 3.2,
         "petal_width": 4.4,
         "flower_class": "Iris-virginica"
