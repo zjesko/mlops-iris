@@ -30,9 +30,9 @@ def load_model():
     clf1.fit(X_train, y_train)    #MLPClassifier
 
     # calculate the print the accuracy score
-    acc = accuracy_score(y_test, clf.predict_better(X_test))
+    acc = accuracy_score(y_test, clf.predict(X_test))
     print(f" GaussianNB Model trained with accuracy: {round(acc, 3)}")
-    acc1 = accuracy_score(y_test, clf1.predict_better(X_test))
+    acc1 = accuracy_score(y_test, clf1.predict(X_test))
     print(f" MLP Model trained with accuracy: {round(acc1, 3)}")
     #clf=clf1
     #acc = accuracy_score(y_test, clf1.predict(X_test))
