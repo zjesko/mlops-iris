@@ -7,7 +7,7 @@ def test_ping():
         response = client.get("/ping")
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"ping": "pong"}
+        assert response.json()["ping"] == "pong"
 
 
 # test to check if Iris Virginica is classified correctly
@@ -23,7 +23,7 @@ def test_pred_virginica():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Iris Virginica"}
+       assert response.json()["flower_class"] == "Iris Virginica"
 
 # task 2
 
@@ -55,4 +55,4 @@ def test_pred_versicolour():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Iris Versicolour"}
+        assert response.json()["flower_class"] == "Iris Versicolour"
