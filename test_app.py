@@ -39,7 +39,7 @@ def test_gopi1():
         response = client.post("/predict_flower",json=payload)
         # confirming correct response is received
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Iris Virginica"}
+        assert response.json() == {"flower_class": "Iris Setosa"}
 
 def test_gopi2():
     #defining sample payload for test case
